@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="./bootstrap.css" />
+    <link rel="stylesheet" href="./login.css" />
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-regular.css"
+    />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap");
+
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        font-family: "Orbitron", sans-serif;
+        background-color: #0d0d0d;
+        color: #f5f5f5;
+      }
+
+      .bg {
+        background-image: url("../assets/cyberpunk-bg.jpg");
+        background-size: cover;
+        background-position: center;
+        height: 100%;
+      }
+
+      .card {
+        width: 80%;
+        max-width: 400px;
+        margin: auto;
+        padding: 20px;
+        background: #1a1a1a;
+        border: 2px solid #00ffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 255, 255, 0.5);
+      }
+
+      .card-title {
+        color: #ff00ff;
+      }
+
+      .form-group label {
+        color: #00ffff;
+      }
+
+      .form-control {
+        background-color: #1a1a1a;
+        border: 1px solid #00ffff;
+        color: #00ffff;
+      }
+
+      .form-control:focus {
+        border-color: #ff00ff;
+        background-color: #333333;
+        color: #ff00ff;
+      }
+
+      .btn-danger {
+        background: linear-gradient(135deg, #ff00ff, #0000ff);
+        border: none;
+      }
+
+      .btn-danger:hover {
+        color: #ff00ff;
+        background: #0d0d0d;
+        border: 2px solid #ff00ff;
+      }
+
+      .input-group-text {
+        background-color: #1a1a1a;
+        border: 1px solid #00ffff;
+      }
+
+      .input-group-text i {
+        color: #00ffff;
+      }
+
+      @media (min-width: 576px) {
+        .card {
+          width: 60%;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .card {
+          width: 40%;
+        }
+      }
+
+      @media (min-width: 992px) {
+        .card {
+          width: 30%;
+        }
+      }
+      .bgback {
+        position: fixed;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .bgback .row1 {
+        display: inline-flex;
+        margin-top: calc(calc(max(9vw, 11vh)) * -0.32);
+        margin-left: calc(calc(max(9vw, 11vh)) * -0.5);
+      }
+      .bgback .row1 .hexagon {
+        position: relative;
+        background-color: black;
+        width: calc(max(9vw, 11vh));
+        height: calc(calc(max(9vw, 11vh)) * 1.1);
+        margin: calc(calc(max(9vw, 11vh)) * 0.04)
+          calc(calc(max(9vw, 11vh)) * 0.02);
+        clip-path: polygon(
+          50% 0%,
+          100% 25%,
+          100% 75%,
+          50% 100%,
+          0% 75%,
+          0% 25%
+        );
+
+        text-align: center;
+        color: rgba(15, 15, 15, 1);
+        line-height: calc(calc(max(9vw, 11vh)) * 1.1);
+        font-size: 2vw;
+        transition: 1s;
+      }
+      .blank {
+        background: transparent;
+      }
+      .bgback .row1:nth-child(even) {
+        margin-left: calc(calc(max(9vw, 11vh)) * 0.02);
+      }
+      .curser {
+        position: absolute;
+        width: calc(calc(max(9vw, 11vh)) * 1.5);
+        height: calc(calc(max(9vw, 11vh)) * 1.5);
+        border-radius: 50%;
+        animation: anim 2s linear infinite;
+        visibility: hidden;
+        transform: translate(-50%, -50%);
+      }
+      *{
+        padding: 0;
+        margin: 0;
+        top: 0;
+        left: 0;
+      }
+      @keyframes anim {
+        0% {
+          filter: hue-rotate(0deg);
+        }
+        100% {
+          filter: hue-rotate(240deg);
+        }
+      }
+      body:hover .curser {
+        background: radial-gradient(
+          circle,
+          rgb(255, 0, 0) 0%,
+          rgba(0, 255, 0, 0) 1200%
+        );
+        visibility: visible;
+      } 
+    </style>
+  </head>
+  <body>
+    <div class="bgback">
+        <div class="curser"></div>
+        <div class="row1">
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+        </div>
+        <div class="row1">
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+        </div>
+        <div class="row1">
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+        </div>
+        <div class="row1">
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+        </div>
+        <div class="row1">
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+        </div>
+        <div class="row1">
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+        </div>
+        <div class="row1">
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+        </div>
+        <div class="row1">
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+        </div>
+        <div class="row1">
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+        </div>
+        <div class="row1">
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+        </div>
+        <div class="row1">
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+          <div class="hexagon"></div>
+        </div>
+      </div>
+    <div
+      class="container-fluid bg d-flex align-items-center justify-content-center"
+    >
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-center mb-4">Login</h5>
+          <form action="exam.html" method="get">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                name="email"
+                class="form-control"
+                id="email"
+                required
+                aria-label="Email"
+              />
+            </div>
+            <br />
+            <div class="form-group">
+              <label for="password">Password</label>
+              <div class="input-group mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  required
+                  aria-label="Password"
+                />
+                <div
+                  role="button"
+                  class="input-group-text justify-content-center"
+                  id="togglePassword"
+                >
+                  <i class="fa-sharp fa-solid fa-eye"></i>
+                </div>
+              </div>
+              <span
+                class="text-danger fw-bold text-uppercase d-none text-end"
+                id="sign-error"
+                >test</span
+              >
+            </div>
+            <br />
+            <button
+              type="submit"
+              id="submit"
+              class="btn btn-danger fw-bold text-light rounded-3 w-100"
+            >
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./js/login.js"></script>
+    <script>
+      const curser = document.querySelector(".curser");
+      document.addEventListener("mousemove", function (e) {
+        let X = e.clientX;
+        let Y = e.clientY;
+        curser.style.left = X + "px";
+        curser.style.top = Y + "px";
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css">
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-regular.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap');
+
+    :root {
+      --primary-color: #ff00ff;
+      --secondary-color: #00ffff;
+    }
+
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: "Orbitron", sans-serif;
+      background-color: #0d0d0d;
+      color: #f5f5f5;
+    }
+
+    main {
+      width: 100%;
+      min-height: 100vh;
+      background-image: url("../assets/cyberpunk-bg.jpg");
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 50px 0;
+    }
+
+    .steps-wrapper {
+      position: relative;
+    }
+
+    .steps {
+      border-radius: 20px;
+      background-color: #1a1a1a;
+      box-shadow: 0px 0px 40px 0px rgba(0, 255, 255, 0.5);
+      width: 100%;
+      padding: 50px;
+      padding-top: 80px;
+      padding-bottom: 30px;
+      position: relative;
+      z-index: 1;
+      border: 2px solid var(--secondary-color);
+    }
+
+    .backgroundSlab {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      background-color: var(--primary-color);
+      z-index: 0;
+    }
+
+    .backgroundSlab::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #ffba00;
+      border-radius: 20px;
+      transform: rotate(-1.5deg);
+      z-index: -1;
+    }
+
+    .backgroundSlab::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--primary-color);
+      border-radius: 20px;
+      transform: rotate(1.5deg);
+      z-index: -2;
+    }
+
+    .question-container {
+      border: 2px solid var(--secondary-color);
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+      box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+    }
+
+    .question-header {
+      font-size: 60px;
+      color: #ff00ff;
+      font-weight: bold;
+      text-align: center;
+      width: 90%;
+      margin: 0 auto;
+    }
+
+    .answer-label {
+      display: block;
+      padding: 10px;
+      background: #1a1a1a;
+      border: 1px solid var(--secondary-color);
+      border-radius: 5px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      color: var(--secondary-color);
+    }
+
+    .answer-label input {
+      margin-right: 10px;
+    }
+
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .btn {
+      margin-top: 20px;
+      background: linear-gradient(135deg, #ff00ff, #0000ff);
+      border: none;
+    }
+
+    .btn:hover {
+      color: #ff00ff;
+      background: #0d0d0d;
+      border: 2px solid #ff00ff;
+    }
+
+    .flagged-questions {
+      margin-top: 20px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .flagged-question-item {
+      cursor: pointer;
+      color: #00ffff;
+      text-decoration: underline;
+    }
+
+    .options {
+      margin-top: 80px;
+      margin-bottom: 15px;
+    }
+
+    .option {
+      width: 44%;
+      position: relative;
+      height: 101px;
+      margin-bottom: 25px;
+      display: grid;
+      align-content: center;
+    }
+
+    .option input {
+      appearance: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 50px;
+      background-color: #1a1a1a;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      border: 1px solid var(--secondary-color);
+    }
+
+    .option input::before {
+      content: "";
+      width: 0;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: var(--primary-color);
+      border-radius: inherit;
+      transition: 0.5s;
+    }
+
+    .option label {
+      font-size: 32px;
+      color: #a3a3a3;
+      font-weight: 500;
+      position: relative;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      height: inherit;
+      pointer-events: none;
+    }
+
+    .option label::before {
+      content: "X";
+      display: inline-block;
+      background-color: #a3a3a3;
+      width: 88px;
+      height: inherit;
+      display: grid;
+      place-content: center;
+      color: #fff;
+      font-weight: bold;
+      border-top-left-radius: 50px;
+      border-bottom-left-radius: 50px;
+      font-size: 39px;
+      transition: 0.5s;
+      margin-right: 50px;
+    }
+
+    .option:nth-child(1) label::before {
+      content: "A";
+    }
+
+    .option:nth-child(2) label::before {
+      content: "B";
+    }
+
+    .option:nth-child(3) label::before {
+      content: "C";
+    }
+
+    .option:nth-child(4) label::before {
+      content: "D";
+    }
+
+    .option input:checked:before {
+      width: 100%;
+    }
+
+    .option input:checked ~ label {
+      color: #fff;
+    }
+
+    .option input:checked ~ label::before {
+      color: #fff;
+      background-color: var(--secondary-color);
+    }
+
+    .animate {
+      animation: slideLeft 1s forwards cubic-bezier(0.77, 0, 0.175, 1);
+      opacity: 0;
+    }
+
+    @keyframes slideLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .animateReverse {
+      animation: slideLeftReverse 1s forwards cubic-bezier(0.77, 0, 0.175, 1);
+      opacity: 1;
+    }
+
+    @keyframes slideLeftReverse {
+      to {
+        opacity: 0;
+        transform: translateX(100%);
+      }
+      from {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .delay-100 {
+      animation-delay: 100ms;
+    }
+
+    .delay-200 {
+      animation-delay: 200ms;
+    }
+
+    .delay-300 {
+      animation-delay: 300ms;
+    }
+
+    @media (min-width: 1600px) {
+      .container {
+        max-width: 1500px;
+      }
+    }
+
+    @media (max-width: 1440px) {
+      .question {
+        font-size: 50px;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .avatar {
+        display: none;
+      }
+      .show-section > fieldset {
+        width: 90%;
+      }
+      .question {
+        font-size: 40px;
+      }
+      .option {
+        width: 45%;
+      }
+      .option label {
+        font-size: 24px;
+      }
+      .option label::before {
+        margin-right: 25px;
+        font-size: 30px;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .show-section > fieldset {
+        width: 100%;
+      }
+      .steps {
+        padding: 50px 20px;
+      }
+      .options {
+        margin-top: 40px;
+      }
+      .option label {
+        font-size: 18px;
+      }
+      .option label::before {
+        margin-right: 25px;
+        font-size: 24px;
+      }
+      .option {
+        width: 48%;
+        height: 70px;
+      }
+      .question {
+        font-size: 35px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .question {
+        font-size: 30px;
+        width: 100%;
+      }
+      .option label::before {
+        margin-right: 15px;
+        font-size: 24px;
+        width: 50px;
+      }
+      .nextPrev {
+        gap: 50px;
+      }
+      .nextPrev button {
+        font-size: 70px;
+      }
+      .stepCount {
+        font-size: 45px;
+      }
+    }
+
+    @media (max-width: 576px) {
+    }
+
+    @media (max-width: 480px) {
+      .question {
+        font-size: 20px;
+      }
+      .option {
+        width: 100%;
+      }
+      .nextPrev {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+      }
+    }
+    .bgback {
+        position: fixed;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .bgback .row1 {
+        display: inline-flex;
+        margin-top: calc(calc(max(9vw, 11vh)) * -0.32);
+        margin-left: calc(calc(max(9vw, 11vh)) * -0.5);
+      }
+      .bgback .row1 .hexagon {
+        position: relative;
+        background-color: black;
+        width: calc(max(9vw, 11vh));
+        height: calc(calc(max(9vw, 11vh)) * 1.1);
+        margin: calc(calc(max(9vw, 11vh)) * 0.04)
+          calc(calc(max(9vw, 11vh)) * 0.02);
+        clip-path: polygon(
+          50% 0%,
+          100% 25%,
+          100% 75%,
+          50% 100%,
+          0% 75%,
+          0% 25%
+        );
+
+        text-align: center;
+        color: rgba(15, 15, 15, 1);
+        line-height: calc(calc(max(9vw, 11vh)) * 1.1);
+        font-size: 2vw;
+        transition: 1s;
+      }
+      .blank {
+        background: transparent;
+      }
+      .bgback .row1:nth-child(even) {
+        margin-left: calc(calc(max(9vw, 11vh)) * 0.02);
+      }
+      .curser {
+        position: absolute;
+        width: calc(calc(max(9vw, 11vh)) * 1.5);
+        height: calc(calc(max(9vw, 11vh)) * 1.5);
+        border-radius: 50%;
+        animation: anim 2s linear infinite;
+        visibility: hidden;
+        transform: translate(-50%, -50%);
+      }
+      *{
+        padding: 0;
+        margin: 0;
+        top: 0;
+        left: 0;
+      }
+      @keyframes anim {
+        0% {
+          filter: hue-rotate(0deg);
+        }
+        100% {
+          filter: hue-rotate(240deg);
+        }
+      }
+      body:hover .curser {
+        background: radial-gradient(
+          circle,
+          rgb(255, 0, 0) 0%,
+          rgba(0, 255, 0, 0) 1200%
+        );
+        visibility: visible;
+      } 
+  </style>
+  <title>Questionnaire</title>
+</head>
+<body>
+  <div class="bgback">
+    <div class="curser"></div>
+    <div class="row1">
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+    </div>
+    <div class="row1">
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+    </div>
+    <div class="row1">
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+    </div>
+    <div class="row1">
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+    </div>
+    <div class="row1">
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+    </div>
+    <div class="row1">
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+    </div>
+    <div class="row1">
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+    </div>
+    <div class="row1">
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+    </div>
+    <div class="row1">
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+    </div>
+    <div class="row1">
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+    </div>
+    <div class="row1">
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+      <div class="hexagon"></div>
+    </div>
+  </div>
+
+  <main class="overflow-hidden">
+    <div class="container">
+      <div class="steps-wrapper">
+        <div class="backgroundSlab"></div>
+        <section class="steps">
+          <div id="time-remaining" class="text-right mb-3"></div> <!-- Timer display -->
+          <div id="questionnaire"></div>
+          <div class="navigation-buttons">
+            <button id="prev-button" class="btn btn-secondary" style="display: none">Previous</button>
+            <button id="next-button" class="btn btn-primary" disabled>Next</button>
+          </div>
+          <div id="flagged-questions-container" class="mt-4">
+            <h3>Flagged Questions</h3>
+            <ul id="flagged-questions" class="flagged-questions"></ul>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <div id="results-screen" class="d-none">
+    <div class="container">
+      <h1>Exam Results</h1>
+      <div id="results"></div>
+      <button id="retry-button" class="btn btn-primary">Retry</button>
+    </div>
+  </div>
+  <script type="module" src="./exam.js"></script>
+  <script>
+    const curser = document.querySelector(".curser");
+    document.addEventListener("mousemove", function (e) {
+      let X = e.clientX;
+      let Y = e.clientY;
+      curser.style.left = X + "px";
+      curser.style.top = Y + "px";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./bootstrap.css" />
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.5.2/css/all.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://site-assets.fontawesome.com/releases/v6.5.2/css/sharp-regular.css"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Orbitron", sans-serif;
+        background-color: #0d0d0d;
+        color: #f5f5f5;
+      }
+
+      .page-content {
+        background: url("../assets/cyberpunk-bg.jpg") no-repeat center center;
+        background-size: cover;
+      }
+
+      .form-v4-content {
+        max-width: 850px;
+        box-shadow: 0px 8px 20px 0px rgba(0, 255, 255, 0.5);
+        border: 2px solid #00ffff;
+      }
+
+      .form-left {
+        border-bottom-left-radius: 10px;
+        border-top-left-radius: 10px;
+        background: linear-gradient(135deg, #ff00ff, #0000ff);
+      }
+
+      .form-left p {
+        font-size: 15px;
+        font-weight: 300;
+        line-height: 1.5;
+      }
+
+      .form-detail input {
+        border-radius: 5px;
+        border: 1px solid #00ffff;
+        background-color: #1a1a1a;
+        color: #00ffff;
+      }
+
+      .form-detail input:focus {
+        border-color: #ff00ff;
+        background-color: #333333;
+        color: #ff00ff;
+      }
+
+      .btn-register {
+        background: linear-gradient(135deg, #ff00ff, #0000ff);
+        border: none;
+      }
+
+      .btn-register:hover {
+        color: #ff00ff;
+        background: #0d0d0d;
+        border: 2px solid #ff00ff;
+      }
+
+      h2,
+      label {
+        color: #00ffff;
+      }
+
+      .input-group-text {
+        background-color: #1a1a1a;
+        border: 1px solid #00ffff;
+      }
+
+      .input-group-text i {
+        color: #00ffff;
+      }
+
+      .rounded-5 {
+        border-radius: 1rem !important;
+      }
+
+      .rounded-left-2 {
+        border-top-left-radius: 1rem !important;
+        border-bottom-left-radius: 1rem !important;
+      }
+
+      .rounded-top-2 {
+        border-top-left-radius: 1rem !important;
+        border-top-right-radius: 1rem !important;
+      }
+      .bgback {
+        position: fixed;
+        height: 100vh;
+        overflow: hidden;
+        z-index: -1;
+      }
+      .bgback .row1 {
+        display: inline-flex;
+        margin-top: calc(calc(max(9vw, 11vh)) * -0.32);
+        margin-left: calc(calc(max(9vw, 11vh)) * -0.5);
+      }
+      .bgback .row1 .hexagon {
+        position: relative;
+        background-color: black;
+        width: calc(max(9vw, 11vh));
+        height: calc(calc(max(9vw, 11vh)) * 1.1);
+        margin: calc(calc(max(9vw, 11vh)) * 0.04)
+          calc(calc(max(9vw, 11vh)) * 0.02);
+        clip-path: polygon(
+          50% 0%,
+          100% 25%,
+          100% 75%,
+          50% 100%,
+          0% 75%,
+          0% 25%
+        );
+
+        text-align: center;
+        color: rgba(15, 15, 15, 1);
+        line-height: calc(calc(max(9vw, 11vh)) * 1.1);
+        font-size: 2vw;
+        transition: 1s;
+      }
+      .blank {
+        background: transparent;
+      }
+      .bgback .row1:nth-child(even) {
+        margin-left: calc(calc(max(9vw, 11vh)) * 0.02);
+      }
+      .curser {
+        position: absolute;
+        width: calc(calc(max(9vw, 11vh)) * 1.5);
+        height: calc(calc(max(9vw, 11vh)) * 1.5);
+        border-radius: 50%;
+        animation: anim 2s linear infinite;
+        visibility: hidden;
+        transform: translate(-50%, -50%);
+      }
+      *{
+        padding: 0;
+        margin: 0;
+        top: 0;
+        left: 0;
+      }
+      @keyframes anim {
+        0% {
+          filter: hue-rotate(0deg);
+        }
+        100% {
+          filter: hue-rotate(360deg);
+        }
+      }
+      body:hover .curser {
+        background: radial-gradient(
+          circle,
+          rgb(255, 0, 0) 0%,
+          rgba(0, 255, 0, 0) 1200%
+        );
+        visibility: visible;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bgback">
+      <div class="curser"></div>
+      <div class="row1">
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+      </div>
+      <div class="row1">
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+      </div>
+      <div class="row1">
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+      </div>
+      <div class="row1">
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+      </div>
+      <div class="row1">
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+      </div>
+      <div class="row1">
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+      </div>
+      <div class="row1">
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+      </div>
+      <div class="row1">
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+      </div>
+      <div class="row1">
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+      </div>
+      <div class="row1">
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+      </div>
+      <div class="row1">
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+      </div>
+    </div>
+
+    <div
+      class="page-content d-flex justify-content-center align-items-center min-vh-100"
+    >
+      <div
+        class="form-v4-content d-flex flex-column flex-md-row w-100 rounded-5 m-5"
+      >
+        <div
+          class="form-left col-12 col-md-5 d-flex flex-column justify-content-center text-light rounded-left-2 rounded-top-2 p-5"
+        >
+          <h2 class="font-weight-bold mb-5 fs-2">INSTRUCTIONS</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto nisi
+            debitis quam earum, ab iste sed aliquid molestias, obcaecati,
+            numquam amet impedit dolor laboriosam eveniet! Magnam voluptatibus
+            recusandae magni odio! about the form.
+          </p>
+        </div>
+        <div class="form-detail col-12 col-md-7 p-4">
+          <h2>Register Form</h2>
+          <br />
+          <form action="" method="get">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="first_name" class="text-dark font-weight-bolder"
+                  >First Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="first_name"
+                  name="first-name"
+                  required
+                />
+                <span
+                  class="text-danger fw-bold text-uppercase d-none text-end"
+                  id="fn-error"
+                  >test</span
+                >
+              </div>
+              <div class="form-group col-md-6">
+                <label for="last_name" class="text-dark font-weight-bolder"
+                  >Last Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="last_name"
+                  name="last-name"
+                  required
+                />
+                <span
+                  class="text-danger fw-bold text-uppercase d-none text-end"
+                  id="ln-error"
+                  >test</span
+                >
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email" class="text-dark font-weight-bolder"
+                >Email</label
+              >
+              <input
+                type="email"
+                name="email"
+                class="form-control"
+                id="email"
+                required
+              />
+              <span
+                class="text-danger fw-bold text-uppercase d-none text-end"
+                id="e-error"
+                >test</span
+              >
+            </div>
+            <div class="form-group">
+              <label for="password" class="text-dark font-weight-bolder"
+                >Password</label
+              >
+              <div class="input-group mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  required
+                />
+                <div
+                  role="button"
+                  class="input-group-text justify-content-center w-0"
+                >
+                  <i class="fa-sharp fa-solid fa-eye"></i>
+                </div>
+              </div>
+              <span
+                class="text-danger fw-bold text-uppercase d-none text-end"
+                id="p-error"
+                >test</span
+              >
+            </div>
+            <div class="form-group">
+              <label
+                class="text-capitalize text-dark font-weight-bolder"
+                for="repassword"
+                >Re-Enter password</label
+              >
+              <div class="input-group mb-3">
+                <input
+                  type="password"
+                  class="form-control"
+                  id="repassword"
+                  required
+                />
+                <div
+                  role="button"
+                  class="input-group-text justify-content-center w-0"
+                >
+                  <i class="fa-sharp fa-solid fa-eye"></i>
+                </div>
+              </div>
+              <span
+                class="text-danger fw-bold text-uppercase d-none text-end"
+                id="rp-error"
+              ></span>
+            </div>
+            <button
+              type="submit"
+              id="submit"
+              class="btn btn-register fw-bold text-light rounded-3"
+            >
+              Register
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./js/index.js"></script>
+    <script>
+      const curser = document.querySelector(".curser");
+document.addEventListener("mousemove", function (e) {
+  let X = e.clientX;
+  let Y = e.clientY;
+  curser.style.left = X + "px";
+  curser.style.top = Y + "px";
+});
+
+    </script>
+  </body>
+</html>

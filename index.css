@@ -1,0 +1,82 @@
+body {
+    margin: 0;
+    font-family: "Orbitron", sans-serif;
+    background-color: #0d0d0d;
+    color: #f5f5f5;
+  }
+  
+  .page-content {
+    background: url("../assets/cyberpunk-bg.jpg") no-repeat center center;
+    background-size: cover;
+  }
+  
+  .form-v4-content {
+    max-width: 850px;
+    box-shadow: 0px 8px 20px 0px rgba(0, 255, 255, 0.5);
+    border: 2px solid #00ffff;
+  }
+  
+  .form-left {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+    background: linear-gradient(135deg, #ff00ff, #0000ff);
+  }
+  
+  .form-left p {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.5;
+  }
+  
+  .form-detail input {
+    border-radius: 5px;
+    border: 1px solid #00ffff;
+    background-color: #1a1a1a;
+    color: #00ffff;
+  }
+  
+  .form-detail input:focus {
+    border-color: #ff00ff;
+    background-color: #333333;
+    color: #ff00ff;
+  }
+  
+  .btn-register {
+    background: linear-gradient(135deg, #ff00ff, #0000ff);
+    border: none;
+  }
+  
+  .btn-register:hover {
+    color: #ff00ff;
+    background: #0d0d0d;
+    border: 2px solid #ff00ff;
+  }
+  
+  h2, label {
+    color: #00ffff;
+  }
+  
+  .input-group-text {
+    background-color: #1a1a1a;
+    border: 1px solid #00ffff;
+  }
+  
+  .input-group-text i {
+    color: #00ffff;
+  }
+  
+  .rounded-5 {
+    border-radius: 1rem !important;
+  }
+  
+  .rounded-left-2 {
+    border-top-left-radius: 1rem !important;
+    border-bottom-left-radius: 1rem !important;
+  }
+  
+  .rounded-top-2 {
+    border-top-left-radius: 1rem !important;
+    border-top-right-radius: 1rem !important;
+  }
+  
+  
